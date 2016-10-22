@@ -1,81 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
 		<?php echo __('CakePHP: the rapid development php framework:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
 
-	<!-- Le styles -->
+    <!-- Bootstrap -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
+
 	<style>
-	body {
-		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	}
+
+
 	</style>
-	<?php echo $this->Html->css('bootstrap-responsive.min'); ?>
 
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
-	<!-- Le fav and touch icons -->
-	<!--
-	<link rel="shortcut icon" href="/ico/favicon.ico">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
-	-->
-	<?php
-	echo $this->fetch('meta');
-	echo $this->fetch('css');
-	?>
-</head>
-
-<body>
-
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="#"><?php echo __('CakePHP'); ?></a>
-				<div class="nav-collapse">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><?= $this->Html->link('顧客管理システム', '/'); ?></li>
 					</ul>
-				</div><!--/.nav-collapse -->
+					<ul class="nav navbar-nav navbar-right">
+            <?php if($currentUser) :?>
+              <li>
+                <?= $this->Html->link('設定変更', ['controller' => 'users', 'action' => 'edit']); ?>
+              </li>
+              <li>
+                <?= $this->Html->link('ログアウト', ['controller' => 'users', 'action' => 'logout']); ?>
+              </li>
+            <?php else :?>
+  						<li>
+  							<?= $this->Html->link('新規登録', ['controller' => 'users', 'action' => 'signup']); ?>
+  						</li>
+							<li>
+								<?= $this->Html->link('ログイン', ['controller' => 'users', 'action' => 'login']); ?>
+							</li>
+            <?php endif; ?>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</div>
+		</nav>
+		<div class="container">
+    <?php echo $this->Session->flash(); ?>
 
-	<div class="container">
+    <?php echo $this->fetch('content'); ?>
 
-		<h1>Bootstrap starter template</h1>
-
-		<?php echo $this->Session->flash(); ?>
-
-		<?php echo $this->fetch('content'); ?>
-
-	</div> <!-- /container -->
-
-	<!-- Le javascript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-	<?php echo $this->Html->script('bootstrap.min'); ?>
-	<?php echo $this->fetch('script'); ?>
-
-</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <?php echo $this->Html->script('bootstrap.min'); ?>
+    <?php echo $this->fetch('script'); ?>
+  </body>
 </html>
