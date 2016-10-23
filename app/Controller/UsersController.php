@@ -31,7 +31,7 @@ class UsersController extends AppController{
           'sign_in_count' =>  $count +1]
         );
 
-        $this->redirect($this->Auth->redirectUrl());
+        $this->redirect(['controller' => 'customers', 'action' => 'index']);
       }
       $this->Flash->error('メールアドレスかパスワードが違います');
     }

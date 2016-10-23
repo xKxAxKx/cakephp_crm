@@ -9,31 +9,33 @@ class Customer extends AppModel{
     'Comment' => ['className' => 'Comment', 'foreignKey' => 'customer_id', 'dependent' => true,]
   ];
 
-  public $actsAs = ['Search.Searchable'];
+  public $actsAs = ['Search.Searchable','Containable'];
   public $filterArgs = [
         'family_name' => ['type' => 'like'],
         'given_name' => ['type' => 'like'],
         'email' => ['type' => 'like'],
         'name' => ['type' => 'like', 'field' => 'Company.name'],
-        'body' => ['type' => 'subquery', 'field' => 'Comment.body', 'method' => 'searchByComment'],
+        'body' => ['type' => 'subquery', 'field' => 'Comment.body', 'method' => ''],
       ];
 
-  // public function searchByComment($data = array()){
-  //   $this->Behaviors->attach('Search.Searchable');
-  //   $comment_id = Set::extract($data,'/id');
-  //   $options = array(
-  //     'conditions' => array('Comment.body'  => $comment_id),
-  //     'contain' => $this->alias,
-  //   );
-  //   if (( $c = count ( $comment_id )) !== 1 ){
-  //     $options['group'] = 'Comment.customer_id HAVING COUNT(Comment.customer_id) = '.$c;
-  //   }
-  //   $data = $this->Customer->find('all',$options);
-  //   $condition = implode(', ', Set::extract($data,'/Customer/id'));
-  //   if ( empty( $condition )){
-  //     $condition = 'NULL';
-  //   }
-  //   return $condition;
-  // }
+  public function searchByBody($data = array()){
+    // $this->Behaviors->attach('Search.Searchable');
+    // $body = Set::extract($body,'/body');
+    // $options = [
+    //     'conditions' => ['Comment.body'  => $body],
+    //     'contain' => $this->alias,
+    // ];
+    // if (( $c = count ( $body )) !== 1 ){
+    //     //ここの条件を通すとAND条件として構成される。ここを通らないとOR条件として構成される。
+    //     $options['group'] = 'Comment.customer_id HAVING COUNT(Comment.customer_id) = '.$c;
+    // }
+    // $data = $this->Comment->find('all',$options);
+    // $condition = implode(', ', Set::extract($data,'/Customer/id'));
+    // if ( empty( $condition )){
+    //     $condition = 'NULL';
+    // }
+    // return $condition;
+
+  }
 
 }
