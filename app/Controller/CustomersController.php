@@ -72,11 +72,6 @@ class CustomersController extends AppController{
     $this->Prg->commonProcess();
 
     if($this->request->data){
-      $id_list = null;
-      if($this->request->data['Customer']['body']){
-        $body = $this->request->data['Customer']['body'];
-        $id_list = $this->Comment->find('list', ['fields' => ['customer_id'], 'conditions'=> ['Comment.body LIKE' => "%{$body}%"]]);
-      }
       $passedArgs = $this->passedArgs;
       $customers = $this->Customer->find('all',
         ['conditions' => [$this->Customer->parseCriteria($this->passedArgs)]]
