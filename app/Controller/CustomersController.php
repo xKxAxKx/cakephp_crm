@@ -73,9 +73,6 @@ class CustomersController extends AppController{
 
     if($this->request->data){
       $passedArgs = $this->passedArgs;
-      $customers = $this->Customer->find('all',
-        ['conditions' => [$this->Customer->parseCriteria($this->passedArgs)]]
-      );
 
       if($this->request->data['Customer']['body']){
         $body = $this->request->data['Customer']['body'];
@@ -83,9 +80,12 @@ class CustomersController extends AppController{
         $customers = $this->Customer->find('all',
           ['conditions' => [$this->Customer->parseCriteria($this->passedArgs), 'Customer.id' => $id_list]]
         );
+      } else {
+        $customers = $this->Customer->find('all',
+          ['conditions' => [$this->Customer->parseCriteria($this->passedArgs)]]
+        );
       }
 
-      $this->set('id_list', $id_list);
       $this->set('customers', $customers);
     } else {
       $passedArgs = null;
